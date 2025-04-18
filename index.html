@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelvin Piña Gomez | Desarrollador & Ingeniero en Sistemas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        /* Estilos adicionales para mejorar aspectos visuales */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4b70e2 0%, #7b54e8 100%);
+        }
+        
+        /* Gradientes mejorados para secciones */
+        .hero {
+            background: linear-gradient(to right, #0f1729, #1e293b);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(75, 112, 226, 0.2) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+        
+        /* Mejoras adicionales */
+        .timeline-icon {
+            background: var(--primary-gradient);
+        }
+        
+        /* Estilo especial para la foto de perfil */
+        .cv-profile-img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            max-width: 300px; /* Limitar el ancho máximo */
+            margin: 0 auto; /* Centrar la imagen */
+            filter: contrast(1.05) saturate(1.1); /* Mejorar ligeramente el contraste y color */
+        }
+        
+        .about-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, rgba(75, 112, 226, 0.1) 0%, rgba(123, 84, 232, 0.1) 100%); /* Fondo sutil con gradiente */
+            padding: 10px; /* Añadir espacio alrededor de la imagen */
+        }
+
+        /* Efecto sutil al pasar el mouse */
+        .about-img-wrapper:hover .about-img {
+            transform: scale(1.03); /* Reducir la escala de zoom */
+            filter: brightness(1.05); /* Aumentar brillo ligeramente */
+        }
+        
+        /* Estilo para el CV en línea */
+        .cv-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-top: 40px;
+        }
+        
+        .dark-mode .cv-section {
+            background: var(--dark-card);
+        }
+        
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+        
+        .cv-row {
+            display: flex;
+            margin-bottom: 30px;
+            gap: 30px;
+        }
+        
+        .cv-section-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .cv-section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            transform: translateY(-50%);
+            border-radius: 50%;
+        }
+        
+        .cv-item {
+            margin-bottom: 15px;
+        }
+        
+        .project-card {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Badges modernos */
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 16px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(75, 112, 226, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(75, 112, 226, 0.2);
+        }
+        
+        .dark-mode .tech-badge {
+            background: rgba(75, 112, 226, 0.2);
+            border: 1px solid rgba(75, 112, 226, 0.3);
+        }
+        
+        /* Mejoras para animación de cursor */
+        .cursor-dot {
+            z-index: 999999;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-outline {
+            z-index: 999998;
+        }
+        
+        /* Efecto hover mejorado para badges */
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Animaciones mejoradas */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animated-gradient {
+            background: linear-gradient(270deg, #4b70e2, #7b54e8, #4b70e2);
+            background-size: 200% 200%;
+            animation: gradientBG 3s ease infinite;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("0bTUb9fqR7deZnOcr"); // Asegurarnos de que esta es la clave API correcta
+          console.log("EmailJS inicializado correctamente");
+       })();
+    </script>
+</head>
+<body>
+    <!-- Cursor personalizado -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">KPG</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#experiencia">Experiencia</a></li>
+                <li><a href="#minijuegos">Minijuegos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero con Parallax y Partículas -->
+    <section id="inicio" class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content container">
+            <h1 class="fade-in">Kelvin Piña Gomez</h1>
+            <h2 class="fade-in delay-1">Desarrollador & Ingeniero en Sistemas</h2>
+            <div class="typing-container fade-in delay-2">
+                <span class="typing"></span>
+            </div>
+            <div class="hero-btns fade-in delay-3">
+                <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+                <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#sobre-mi">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Mí -->
+    <section id="sobre-mi" class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Sobre Mí</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-img-container" data-aos="fade-right">
+                    <div class="about-img-wrapper">
+                        <!-- Reemplazar la imagen con un avatar SVG animado -->
+                        <div class="avatar-container">
+                            <div class="avatar-wrapper">
+                                <div class="avatar-circle">
+                                    <div class="avatar-initials">KP</div>
+                                </div>
+                                <div class="avatar-decoration">
+                                    <span class="decoration-dot" style="--delay: 0s"></span>
+                                    <span class="decoration-dot" style="--delay: 1s"></span>
+                                    <span class="decoration-dot" style="--delay: 2s"></span>
+                                    <span class="decoration-line"></span>
+                                    <span class="decoration-code">&lt;/&gt;</span>
+                                </div>
+                            </div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                    </div>
+                    <!-- Añadir esto justo después del avatar para incluir tech stacks animados -->
+                    <div class="tech-orbit">
+                        <div class="tech-icon" style="--angle: 0deg; --delay: 0s;">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="tech-icon" style="--angle: 60deg; --delay: 0.5s;">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="tech-icon" style="--angle: 120deg; --delay: 1s;">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="tech-icon" style="--angle: 180deg; --delay: 1.5s;">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="tech-icon" style="--angle: 240deg; --delay: 2s;">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="tech-icon" style="--angle: 300deg; --delay: 2.5s;">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                    </div>
+                    <div class="about-badges">
+                        <span class="badge"><i class="fas fa-laptop-code"></i> Desarrollador</span>
+                        <span class="badge"><i class="fas fa-graduation-cap"></i> Estudiante</span>
+                        <span class="badge"><i class="fas fa-certificate"></i> Scrum</span>
+                    </div>
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3>¡Hola! Soy <span class="highlight">Kelvin Piña Gomez</span></h3>
+                    <p>Soy un apasionado desarrollador de software y estudiante de Ingeniería en Sistemas en la Universidad Nacional Pedro Henríquez Ureña (UNPHU) con vocación servicial y habilidades en desarrollo de aplicaciones.</p>
+                    <p>Mi enfoque se centra en el desarrollo de aplicaciones multiplataforma, con experiencia en diversas tecnologías como .NET MAUI, Python, Java y MySQL. Actualmente trabajo como desarrollador en Acierta Consulting, donde me especializo en crear soluciones tecnológicas innovadoras y funcionales.</p>
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>pinagomezkelvinjose@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>849-271-8177</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Santo Domingo, República Dominicana</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-id-card"></i>
+                            <span>Cédula: 402-2986796-1</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/Kelvin0880" target="_blank" class="tooltip">
+                            <i class="fab fa-github"></i>
+                            <span class="tooltiptext">GitHub</span>
+                        </a>
+                        <a href="https://www.instagram.com/kelvinpgxl/" target="_blank" class="tooltip">
+                            <i class="fab fa-instagram"></i>
+                            <span class="tooltiptext">Instagram</span>
+                        </a>
+                        <a href="mailto:pinagomezkelvinjose@gmail.com" class="tooltip">
+                            <i class="fas fa-envelope"></i>
+                            <span class="tooltiptext">Email</span>
+                        </a>
+                    </div>
+                    <button id="ver-cv-btn" class="btn btn-outline">
+                        <i class="fas fa-file-alt"></i> Ver CV Online
+                    </button>
+                    <a href="#" id="download-cv" class="btn btn-outline download-cv" style="margin-left: 10px;">
+                        <i class="fas fa-download"></i> Descargar CV
+                    </a>
+                </div>
+            </div>
+            
+            <!-- CV en línea -->
+            <div id="cv-online" class="cv-section" style="display: none;" data-aos="fade-up">
+                <div class="cv-header">
+                    <h3>Currículum Vitae - Kelvin Piña Gomez</h3>
+                    <p><i class="fas fa-calendar-alt"></i> Actualizado: Abril 2025</p>
+                </div>
+                
+                <div class="cv-row">
+                    <div class="cv-col" style="flex: 2;">
+                        <h4 class="cv-section-title">Perfil Profesional</h4>
+                        <p>Estudiante de Ingeniería en Sistema con vocación servicial, dispuesto a colaborar con cualquier entidad que lo necesite. Responsable y con facilidad para las relaciones personales.</p>
+                        
+                        <h4 class="cv-section-title">Experiencia Profesional</h4>
+                        <div class="cv-item">
+                            <h5><i class="fas fa-briefcase"></i> Desarrollador .NET MAUI</h5>
+                            <p><strong>Acierta Consulting</strong> | Mar 2025 - Presente</p>
+                            <p>Desarrollo de aplicaciones multiplataforma utilizando .NET MAUI para clientes empresariales, implementación de interfaces de usuario modernas y gestión de bases de datos.</p>
+                        </div>
+                        
+                        <h4 class="cv-section-title">Formación Académica</h4>
+                        <div class="cv-item">
+                            <h5><i class="fas fa-university"></i> Universidad UNPHU</h5>
+                            <p><strong>Ingeniería en Sistemas Computacionales</strong> | 2022 - Presente</p>
+                        </div>
+                        <div class="cv-item">
+                            <h5><i class="fas fa-school"></i> Colegio Nuevo Mundo</h5>
+                            <p><strong>Bachiller</strong> | 2016 - 2020</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-col" style="flex: 1;">
+                        <h4 class="cv-section-title">Habilidades Técnicas</h4>
+                        <p><strong>Lenguajes de programación:</strong></p>
+                        <div>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">Java</span>
+                        </div>
+                        
+                        <p style="margin-top: 15px;"><strong>Frameworks y Librerías:</strong></p>
+                        <div>
+                            <span class="tech-badge">.NET MAUI</span>
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Flask</span>
+                            <span class="tech-badge">Next.js</span>
+                            <span class="tech-badge">Tailwind</span>
+                        </div>
+                        
+                        <p style="margin-top: 15px;"><strong>Bases de datos:</strong></p>
+                        <div>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">SQL Server</span>
+                            <span class="tech-badge">MongoDB</span>
+                        </div>
+                        
+                        <h4 class="cv-section-title" style="margin-top: 20px;">Certificaciones</h4>
+                        <div class="cv-item">
+                            <p><i class="fas fa-certificate"></i> <strong>Certificación en Scrum</strong> | 2022</p>
+                            <p>Metodologías ágiles para la gestión de proyectos de desarrollo de software.</p>
+                        </div>
+                        
+                        <h4 class="cv-section-title" style="margin-top: 20px;">Idiomas</h4>
+                        <div class="cv-item">
+                            <p><strong>Inglés:</strong> Nivel Intermedio (oral y escrito)</p>
+                            <p><strong>Español:</strong> Nativo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Experiencia Profesional (NUEVA) -->
+    <section id="experiencia" class="section timeline-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Experiencia & Educación</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-block" data-aos="fade-right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Desarrollador .NET MAUI</h3>
+                        <span class="timeline-date">Marzo 2025 - Presente</span>
+                        <p><strong>Acierta Consulting, Novo Centro</strong></p>
+                        <p>Desarrollo de aplicaciones multiplataforma utilizando .NET MAUI para soluciones empresariales. Implementación de interfaces de usuario modernas y funcionales, integración con APIs externas y gestión de bases de datos.</p>
+                        <div style="margin-top: 10px;">
+                            <span class="tech-badge">.NET MAUI</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">SQL Server</span>
+                            <span class="tech-badge">Git</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-block" data-aos="fade-left">
+                    <div class="timeline-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Universidad UNPHU</h3>
+                        <span class="timeline-date">2022 - Presente</span>
+                        <p>Estudiante de Ingeniería en Sistemas Computacionales en la Universidad Nacional Pedro Henríquez Ureña (UNPHU). Enfoque en desarrollo de software, bases de datos y arquitectura de sistemas.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-block" data-aos="fade-right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Certificación en Scrum</h3>
+                        <span class="timeline-date">2022</span>
+                        <p>Metodologías ágiles para la gestión de proyectos de desarrollo de software. Adquisición de habilidades en planificación de sprints, retrospectivas y optimización del proceso de desarrollo.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-block" data-aos="fade-left">
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Colegio Nuevo Mundo</h3>
+                        <span class="timeline-date">2016 - 2020</span>
+                        <p>Bachiller en Ciencias y Letras. Primeros pasos en la programación y desarrollo de lógica computacional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Proyectos (Mejorada) -->
+    <section id="proyectos" class="section projects-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Mis Proyectos</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="filter-buttons" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="app">Aplicaciones</button>
+                <button class="filter-btn" data-filter="system">Sistemas</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Proyecto FreshTrack -->
+                <div class="project-card" data-category="system" data-aos="fade-up">
+                    <div class="project-content">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>FreshTrack</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <a href="#project-modal-1" class="project-preview" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-plus" style="color: var(--primary-color);"></i>
+                                </a>
+                                <a href="https://github.com/Kelvin0880/Proyecto-FreshTrack" class="project-link" target="_blank" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fab fa-github" style="color: var(--primary-color);"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="animated-badge" style="display: inline-block; background: var(--primary-gradient); color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 10px;">Sistema IoT</p>
+                        <p>Sistema de seguimiento y gestión de inventario para productos frescos con sensores IoT que monitorean temperatura y humedad con alertas de caducidad en tiempo real.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Arduino</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto Software Project Master -->
+                <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-content">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Software Project Master</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <a href="#project-modal-2" class="project-preview" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-plus" style="color: var(--primary-color);"></i>
+                                </a>
+                                <a href="https://github.com/Kelvin0880/softwareproyect-master" class="project-link" target="_blank" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fab fa-github" style="color: var(--primary-color);"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="animated-badge" style="display: inline-block; background: var(--primary-gradient); color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 10px;">Aplicación Web</p>
+                        <p>Sistema que reemplaza la pizarra de trabajo empresarial tradicional, permitiendo consultar y actualizar tareas diarias digitalmente con gestión eficiente y reportes detallados.</p>
+                        <div class="project-tech">
+                            <span>JavaScript</span>
+                            <span>React</span>
+                            <span>Next.js</span>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto Integrador -->
+                <div class="project-card" data-category="app" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-content">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Sistema Inventario UNPHU</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <a href="#project-modal-3" class="project-preview" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-plus" style="color: var(--primary-color);"></i>
+                                </a>
+                                <a href="https://github.com/Kelvin0880/proyectointegrador" class="project-link" target="_blank" style="width: 35px; height: 35px; border-radius: 50%; background: rgba(75, 112, 226, 0.1); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fab fa-github" style="color: var(--primary-color);"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="animated-badge" style="display: inline-block; background: var(--primary-gradient); color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 10px;">Aplicación Institucional</p>
+                        <p>Sistema para gestión eficiente de préstamos y devoluciones de materiales tecnológicos a estudiantes y docentes en la UNPHU, con control de inventario y seguimiento de solicitudes.</p>
+                        <div class="project-tech">
+                            <span>Next.js</span>
+                            <span>React</span>
+                            <span>MySQL</span>
+                            <span>Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals con contenido detallado -->
+    <div id="project-modal-1" class="project-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>FreshTrack - Sistema de Control para Productos Frescos</h2>
+            <div class="modal-desc">
+                <div style="margin-bottom: 20px;">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Arduino</span>
+                    <span class="tech-badge">Sensores</span>
+                    <span class="tech-badge">IoT</span>
+                </div>
+                <p>FreshTrack es un sistema integral de seguimiento y gestión de inventario para productos frescos que incluye sensores de temperatura y humedad conectados a través de Arduino. El sistema proporciona alertas de caducidad en tiempo real y genera reportes detallados sobre el estado de los productos.</p>
+                <p>Esta solución combina hardware IoT con una interfaz web para monitorear constantemente las condiciones ambientales de almacenamiento, asegurando la calidad y reduciendo el desperdicio de productos perecederos.</p>
+                
+                <h4>Características principales:</h4>
+                <ul>
+                    <li><strong>Monitoreo en tiempo real:</strong> Sensores de temperatura y humedad conectados a Arduino</li>
+                    <li><strong>Pantallas LED:</strong> Muestran información de estado directamente en las zonas de almacenamiento</li>
+                    <li><strong>Sistema de alertas:</strong> Notificaciones por email y SMS cuando los parámetros salen del rango óptimo</li>
+                    <li><strong>Dashboard web:</strong> Interfaz intuitiva para visualizar datos históricos y tendencias</li>
+                    <li><strong>Gestión de inventario:</strong> Seguimiento de fechas de caducidad y rotación de productos</li>
+                </ul>
+                
+                <h4>Implementación técnica:</h4>
+                <p>El sistema se basa en una red de sensores DHT22 (temperatura/humedad) conectados a placas Arduino que transmiten datos a un servidor central. La interfaz web está construida con HTML, CSS y JavaScript, y proporciona visualización en tiempo real mediante gráficos interactivos.</p>
+                
+                <a href="https://github.com/Kelvin0880/Proyecto-FreshTrack" class="btn btn-primary" target="_blank">Ver en GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-modal-2" class="project-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Software Project Master - Gestión de Tareas Empresariales</h2>
+            <div class="modal-desc">
+                <div style="margin-bottom: 20px;">
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">Next.js</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">JWT</span>
+                    <span class="tech-badge">TailwindCSS</span>
+                </div>
+                <p>Software Project Master es un sistema completo que reemplaza la pizarra de trabajo empresarial tradicional, permitiendo a los empleados consultar y actualizar sus tareas diarias de manera digital. Los supervisores pueden asignar, modificar y hacer seguimiento de las tareas de forma eficiente.</p>
+                <p>El sistema incluye notificaciones automáticas y la generación de reportes detallados sobre el estado de las tareas, mejorando la comunicación, organización y productividad dentro de la empresa.</p>
+                
+                <h4>Arquitectura del proyecto:</h4>
+                <ul>
+                    <li><strong>Frontend:</strong> React con Next.js para una experiencia de usuario optimizada</li>
+                    <li><strong>Backend:</strong> API Routes de Next.js para todas las operaciones CRUD</li>
+                    <li><strong>Autenticación:</strong> Sistema basado en JWT con roles (admin y empleado)</li>
+                    <li><strong>Base de datos:</strong> MySQL para almacenar usuarios y tareas</li>
+                    <li><strong>UI/UX:</strong> Diseño moderno con TailwindCSS e iconos de Lucide React</li>
+                </ul>
+                
+                <h4>Características principales:</h4>
+                <ul>
+                    <li><strong>Sistema Kanban:</strong> Gestión visual de tareas con funcionalidad drag-and-drop</li>
+                    <li><strong>Estados de tarea:</strong> Pendiente, En Progreso, En Revisión, Completada</li>
+                    <li><strong>Prioridades:</strong> Alta, Media, Baja con indicadores visuales</li>
+                    <li><strong>Reportes:</strong> Generación de informes PDF globales y por usuario</li>
+                    <li><strong>Dashboard:</strong> Vista personalizada para cada empleado y vista general para supervisores</li>
+                </ul>
+                
+                <a href="https://github.com/Kelvin0880/softwareproyect-master" class="btn btn-primary" target="_blank">Ver en GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-modal-3" class="project-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Sistema de Inventario UNPHU - Gestión de Préstamos Institucionales</h2>
+            <div class="modal-desc">
+                <div style="margin-bottom: 20px;">
+                    <span class="tech-badge">Next.js</span>
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">NextAuth.js</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">TailwindCSS</span>
+                </div>
+                <p>Este proyecto desarrolla un sistema informático para la gestión eficiente de préstamos y devoluciones de materiales tecnológicos a estudiantes y docentes en la Universidad Nacional Pedro Henríquez Ureña (UNPHU).</p>
+                <p>La solución automatiza y optimiza los procesos de los departamentos de tecnología y audiovisual, mejorando el método de gestión de préstamos de materiales de uso tecnológico e inventario, adaptable a cualquier organización con necesidades similares.</p>
+                
+                <h4>Características del Sistema:</h4>
+                <ul>
+                    <li><strong>Gestión de Inventario:</strong> Registro y seguimiento de equipos por departamento</li>
+                    <li><strong>Sistema de Solicitudes:</strong> Proceso de solicitud de préstamos con flujo de aprobación</li>
+                    <li><strong>Control de Estados:</strong> Seguimiento de disponibilidad (disponible, agotado, en mantenimiento)</li>
+                    <li><strong>Panel Administrativo:</strong> Gestión centralizada con estadísticas de uso</li>
+                    <li><strong>Experiencia de Usuario:</strong> Interfaces intuitivas con retroalimentación en tiempo real</li>
+                </ul>
+                
+                <h4>Arquitectura técnica:</h4>
+                <p>El sistema sigue una arquitectura moderna utilizando Next.js como framework full-stack, con rutas API para el backend y componentes React para la interfaz de usuario. La autenticación se gestiona a través de NextAuth.js con un sistema de roles, y Tailwind CSS proporciona un diseño responsivo y atractivo.</p>
+                
+                <h4>Base de Datos:</h4>
+                <p>Utiliza MySQL con relaciones entre tablas para usuarios, departamentos, items y solicitudes, permitiendo consultas eficientes y manteniendo la integridad referencial de los datos.</p>
+                
+                <a href="https://github.com/Kelvin0880/proyectointegrador" class="btn btn-primary" target="_blank">Ver en GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Habilidades con efecto Parallax -->
+    <section id="habilidades" class="section skills-section">
+        <div class="container">
+            <div class="section-header light" data-aos="fade-up">
+                <h2>Mis Habilidades</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-category" data-aos="fade-up">
+                    <h3>Desarrollo Frontend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <h4>HTML5</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                            <h4>CSS3</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <h4>JavaScript</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <h4>React</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-bootstrap"></i></div>
+                            <h4>Tailwind</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Desarrollo Backend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <h4>Python</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-java"></i></div>
+                            <h4>Java</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 75%"></div></div>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-microsoft"></i></div>
+                            <h4>.NET MAUI</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 87%"></div></div>
+                            <span class="skill-percent">87%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <h4>MySQL</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 88%"></div></div>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Herramientas & Metodologías</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <h4>Git</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-tasks"></i></div>
+                            <h4>Scrum</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                            <h4>Terminal</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-file-word"></i></div>
+                            <h4>Office</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Minijuegos Interactivos -->
+    <section id="minijuegos" class="section games-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Mini Juegos</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">¡Diviértete un rato con estos juegos desarrollados por mí!</p>
+            </div>
+            
+            <div class="games-wrapper">
+                <!-- Juego de Memoria -->
+                <div class="game-card" data-aos="fade-up">
+                    <div class="game-header">
+                        <h3>Memory Game</h3>
+                        <div class="game-controls">
+                            <button id="memory-start" class="game-btn">Comenzar</button>
+                            <button id="memory-reset" class="game-btn">Reiniciar</button>
+                        </div>
+                    </div>
+                    <div class="game-container" id="memory-game">
+                        <div class="memory-grid">
+                            <div class="memory-card" data-value="1"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🚀</div></div></div>
+                            <div class="memory-card" data-value="1"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🚀</div></div></div>
+                            <div class="memory-card" data-value="2"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🌟</div></div></div>
+                            <div class="memory-card" data-value="2"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🌟</div></div></div>
+                            <div class="memory-card" data-value="3"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🔥</div></div></div>
+                            <div class="memory-card" data-value="3"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🔥</div></div></div>
+                            <div class="memory-card" data-value="4"><div class="card-inner"><div class="card-front">?</div><div class="card-back">💻</div></div></div>
+                            <div class="memory-card" data-value="4"><div class="card-inner"><div class="card-front">?</div><div class="card-back">💻</div></div></div>
+                            <div class="memory-card" data-value="5"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🎮</div></div></div>
+                            <div class="memory-card" data-value="5"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🎮</div></div></div>
+                            <div class="memory-card" data-value="6"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🧠</div></div></div>
+                            <div class="memory-card" data-value="6"><div class="card-inner"><div class="card-front">?</div><div class="card-back">🧠</div></div></div>
+                        </div>
+                        <div id="memory-result" class="game-result">
+                            <span>Movimientos: <strong id="memory-moves">0</strong></span>
+                            <span>Tiempo: <strong id="memory-time">0s</strong></span>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <p>Un juego de memoria clásico donde debes encontrar todas las parejas con el menor número de movimientos posibles.</p>
+                    </div>
+                </div>
+                
+                <!-- Juego de Snake -->
+                <div class="game-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="game-header">
+                        <h3>Snake Game</h3>
+                        <div class="game-controls">
+                            <button id="snake-start" class="game-btn">Comenzar</button>
+                            <button id="snake-reset" class="game-btn">Reiniciar</button>
+                        </div>
+                    </div>
+                    <div class="game-container">
+                        <canvas id="snake-game" width="300" height="300"></canvas>
+                        <div id="snake-result" class="game-result">
+                            <span>Puntuación: <strong id="snake-score">0</strong></span>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <p>El clásico juego de Snake. Usa las teclas de flecha para mover la serpiente y comer la comida. ¡No choques contra las paredes o contra ti mismo!</p>
+                        <div class="game-controls-mobile">
+                            <button id="snake-up" class="mobile-control"><i class="fas fa-chevron-up"></i></button>
+                            <div>
+                                <button id="snake-left" class="mobile-control"><i class="fas fa-chevron-left"></i></button>
+                                <button id="snake-down" class="mobile-control"><i class="fas fa-chevron-down"></i></button>
+                                <button id="snake-right" class="mobile-control"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Juego de Quiz Programación -->
+                <div class="game-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="game-header">
+                        <h3>Quiz de Programación</h3>
+                        <div class="game-controls">
+                            <button id="quiz-start" class="game-btn">Comenzar</button>
+                            <button id="quiz-reset" class="game-btn">Reiniciar</button>
+                        </div>
+                    </div>
+                    <div class="game-container">
+                        <div id="quiz-game">
+                            <div id="quiz-question" class="quiz-question">
+                                <h4>¿Listo para poner a prueba tus conocimientos en programación?</h4>
+                            </div>
+                            <div id="quiz-options" class="quiz-options">
+                                <!-- Las opciones se generarán dinámicamente mediante JavaScript -->
+                            </div>
+                        </div>
+                        <div id="quiz-result" class="game-result">
+                            <span>Correctas: <strong id="quiz-score">0</strong> / <span id="quiz-total">10</span></span>
+                        </div>
+                    </div>
+                    <div class="game-footer">
+                        <p>Pon a prueba tus conocimientos de programación con este quiz interactivo. ¡Responde correctamente para aumentar tu puntuación!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reemplazar la sección de info-cards por esta versión mejorada -->
+            <div class="games-info" data-aos="fade-up">
+                <div class="info-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Desarrollo Front-end</h4>
+                    <p>Estos juegos demuestran mis habilidades en programación interactiva con JavaScript y Canvas, utilizando patrones de diseño modernos.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-code"></i>
+                    <h4>Clean Code</h4>
+                    <p>Código modular, mantenible y bien estructurado con patrones de diseño que facilita la expansión y el mantenimiento continuo.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Responsivo</h4>
+                    <p>Juegos adaptados a diferentes tamaños de pantalla, con controles táctiles en dispositivos móviles y experiencia optimizada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Contacto</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>¡Hablemos!</h3>
+                    <p>Estoy disponible para proyectos freelance, colaboraciones o posiciones a tiempo completo. Siéntete libre de contactarme para discutir cómo puedo contribuir a tus proyectos tecnológicos.</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>pinagomezkelvinjose@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>849-271-8177</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Ubicación</h4>
+                            <p>Calle 27 de febrero, Casa #21, bloque 8, Los Alcarrizos, Santo Domingo. CP: 10801</p>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <a href="https://github.com/Kelvin0880" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/kelvinpgxl/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:pinagomezkelvinjose@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Actualizar el formulario existente -->
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="from_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="reply_to" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Enviar Mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Kelvin Piña Gomez</h3>
+                    <p>Desarrollador & Ingeniero en Sistemas</p>
+                </div>
+                <!-- Actualizar los enlaces del footer -->
+                <div class="footer-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#sobre-mi">Sobre Mí</a>
+                    <a href="#proyectos">Proyectos</a>
+                    <a href="#habilidades">Habilidades</a>
+                    <a href="#experiencia">Experiencia</a>
+                    <a href="#minijuegos">Minijuegos</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Kelvin0880" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/kelvinpgxl/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:pinagomezkelvinjose@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Kelvin Piña Gomez. Todos los derechos reservados.</p>
+                <p class="footer-credit">Desarrollado con <i class="fas fa-heart"></i> por Kelvin Piña Gomez | CI: 402-2986796-1</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/games.js"></script>
+    <script>
+        // Script adicional para funciones personalizadas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejo de CV online
+            const verCvBtn = document.getElementById('ver-cv-btn');
+            const cvOnline = document.getElementById('cv-online');
+            
+            if (verCvBtn && cvOnline) {
+                verCvBtn.addEventListener('click', function() {
+                    if (cvOnline.style.display === 'none' || cvOnline.style.display === '') {
+                        cvOnline.style.display = 'block';
+                        verCvBtn.innerHTML = '<i class="fas fa-file-alt"></i> Ocultar CV';
+                        
+                        // Scroll suave hasta el CV
+                        setTimeout(() => {
+                            cvOnline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    } else {
+                        cvOnline.style.display = 'none';
+                        verCvBtn.innerHTML = '<i class="fas fa-file-alt"></i> Ver CV Online';
+                    }
+                });
+            }
+            
+            // Añadir animación de entrada a las tarjetas de proyectos
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = 'var(--box-shadow-hover)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'var(--box-shadow)';
+                });
+            });
+            
+            // Mejorar la animación de los botones
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+``` 
