@@ -457,115 +457,189 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Descarga de CV simulada
+    // Descarga de CV en PDF
     const downloadCV = document.querySelector('.download-cv');
     if (downloadCV) {
         downloadCV.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Crear un PDF dinámico con la información del CV usando jsPDF
+
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Agregar cabecera
+            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+            const blue  = [75, 112, 226];
+            const gray  = [100, 100, 100];
+            const black = [30, 30, 30];
+            const pageH = 297;
+            const marginL = 18;
+            const marginR = 192;
+            let y = 16;
+
+            function sectionHeader(title) {
+                if (y > 265) { doc.addPage(); y = 16; }
+                doc.setFontSize(13);
+                doc.setTextColor(...blue);
+                doc.setFont('helvetica', 'bold');
+                doc.text(title, marginL, y);
+                y += 2;
+                doc.setDrawColor(...blue);
+                doc.setLineWidth(0.3);
+                doc.line(marginL, y, marginR, y);
+                y += 5;
+                doc.setFont('helvetica', 'normal');
+            }
+
+            function checkPage(needed) {
+                if (y + needed > 278) { doc.addPage(); y = 16; }
+            }
+
+            // ── CABECERA ──────────────────────────────────────────────
             doc.setFontSize(22);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Kelvin Piña Gomez', 105, 20, { align: 'center' });
-            
-            doc.setFontSize(12);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Desarrollador & Ingeniero en Sistemas', 105, 28, { align: 'center' });
-            
-            doc.setFontSize(10);
-            doc.text('Email: pinagomezkelvinjose@gmail.com | Tel: 849-271-8177', 105, 34, { align: 'center' });
-            doc.text('Santo Domingo, República Dominicana | CI: 402-2986796-1', 105, 39, { align: 'center' });
-            
-            // Línea separadora
-            doc.setDrawColor(75, 112, 226);
-            doc.setLineWidth(0.5);
-            doc.line(20, 42, 190, 42);
-            
-            // Perfil profesional
-            doc.setFontSize(14);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Perfil Profesional', 20, 50);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Estudiante de Ingeniería en Sistema con vocación servicial, dispuesto a colaborar con cualquier', 20, 58);
-            doc.text('entidad que lo necesite. Responsable y con facilidad para las relaciones personales.', 20, 63);
-            
-            // Experiencia
-            doc.setFontSize(14);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Experiencia Profesional', 20, 73);
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Desarrollador .NET MAUI', 20, 81);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Acierta Consulting | Marzo 2025 - Presente', 20, 86);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Desarrollo de aplicaciones multiplataforma utilizando .NET MAUI para clientes empresariales,', 20, 91);
-            doc.text('implementación de interfaces de usuario modernas y gestión de bases de datos.', 20, 96);
-            
-            // Formación académica
-            doc.setFontSize(14);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Formación Académica', 20, 106);
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Universidad UNPHU', 20, 114);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Ingeniería en Sistemas Computacionales | 2022 - Presente', 20, 119);
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Colegio Nuevo Mundo', 20, 127);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Bachiller | 2016 - 2020', 20, 132);
-            
-            // Habilidades técnicas
-            doc.setFontSize(14);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Habilidades Técnicas', 20, 142);
-            
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text('• Lenguajes: JavaScript, Python, C#, Java', 20, 150);
-            doc.text('• Frameworks: .NET MAUI, React, Flask, Next.js, Tailwind', 20, 155);
-            doc.text('• Bases de datos: MySQL, SQL Server, MongoDB', 20, 160);
-            doc.text('• Herramientas: Git, Scrum, Terminal, Office', 20, 165);
-            doc.text('• Idiomas: Español (nativo), Inglés (intermedio)', 20, 170);
-            
-            // Certificaciones
-            doc.setFontSize(14);
-            doc.setTextColor(75, 112, 226);
-            doc.text('Certificaciones', 20, 180);
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text('Certificación en Scrum (2022)', 20, 188);
-            
-            doc.setFontSize(10);
-            doc.text('Metodologías ágiles para la gestión de proyectos de desarrollo de software.', 20, 193);
-            
-            // Footer
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text('CV generado desde el portafolio personal - ' + new Date().toLocaleDateString(), 105, 280, {align: 'center'});
-            
-            // Guardar el PDF
-            doc.save('CV_Kelvin_Piña_Gomez.pdf');
+            doc.setTextColor(...blue);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Kelvin Piña Gomez', 105, y, { align: 'center' });
+            y += 7;
+
+            doc.setFontSize(11);
+            doc.setTextColor(...gray);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Desarrollador & Ingeniero en Sistemas', 105, y, { align: 'center' });
+            y += 5;
+
+            doc.setFontSize(9);
+            doc.text('pinagomezkelvinjose@gmail.com  |  849-271-8177  |  Santo Domingo, RD', 105, y, { align: 'center' });
+            y += 4;
+            doc.text('github.com/Kelvin0880  |  CI: 402-2986796-1', 105, y, { align: 'center' });
+            y += 4;
+
+            doc.setDrawColor(...blue);
+            doc.setLineWidth(0.6);
+            doc.line(marginL, y, marginR, y);
+            y += 7;
+
+            // ── PERFIL PROFESIONAL ────────────────────────────────────
+            sectionHeader('Perfil Profesional');
+            doc.setFontSize(9.5);
+            doc.setTextColor(...black);
+            const perfil = doc.splitTextToSize(
+                'Desarrollador de software y estudiante de Ingeniería en Sistemas Computacionales en la UNPHU. ' +
+                'Experiencia en desarrollo de aplicaciones multiplataforma y móvil (Android, iOS, Flutter, .NET MAUI). ' +
+                'Responsable, proactivo y con facilidad para las relaciones personales. Disponible para nuevos retos.',
+                marginR - marginL
+            );
+            checkPage(perfil.length * 4.5 + 4);
+            doc.text(perfil, marginL, y);
+            y += perfil.length * 4.5 + 5;
+
+            // ── EXPERIENCIA PROFESIONAL ───────────────────────────────
+            sectionHeader('Experiencia Profesional');
+            doc.setFontSize(10.5);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Desarrollador .NET MAUI', marginL, y);
+            y += 4.5;
+            doc.setFontSize(9);
+            doc.setTextColor(...gray);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Acierta Consulting, Novo Centro  |  Marzo 2025 – Enero 2026', marginL, y);
+            y += 4.5;
+            doc.setTextColor(...black);
+            const expDesc = doc.splitTextToSize(
+                'Desarrollo de aplicaciones multiplataforma con .NET MAUI para clientes empresariales. ' +
+                'Implementación de interfaces de usuario modernas, integración con APIs externas y gestión de bases de datos SQL Server.',
+                marginR - marginL
+            );
+            checkPage(expDesc.length * 4.5 + 6);
+            doc.text(expDesc, marginL, y);
+            y += expDesc.length * 4.5 + 6;
+
+            // ── FORMACIÓN ACADÉMICA ───────────────────────────────────
+            sectionHeader('Formación Académica');
+            doc.setFontSize(10.5);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Universidad Nacional Pedro Henríquez Ureña (UNPHU)', marginL, y);
+            y += 4.5;
+            doc.setFontSize(9);
+            doc.setTextColor(...gray);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Ingeniería en Sistemas Computacionales  |  2022 – Presente', marginL, y);
+            y += 6;
+
+            doc.setFontSize(10.5);
+            doc.setTextColor(...black);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Colegio Nuevo Mundo', marginL, y);
+            y += 4.5;
+            doc.setFontSize(9);
+            doc.setTextColor(...gray);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Bachiller en Ciencias y Letras  |  2016 – 2020', marginL, y);
+            y += 8;
+
+            // ── HABILIDADES TÉCNICAS ──────────────────────────────────
+            sectionHeader('Habilidades Técnicas');
+            doc.setFontSize(9.5);
+            doc.setTextColor(...black);
+            const skills = [
+                { label: 'Lenguajes:',    value: 'JavaScript, TypeScript, Python, C#, Java, Kotlin, Swift, Dart' },
+                { label: 'Frameworks:',   value: '.NET MAUI, Flutter, React, Next.js, Flask, Tailwind CSS' },
+                { label: 'Bases de datos:', value: 'MySQL, SQL Server, MongoDB' },
+                { label: 'Herramientas:', value: 'Git, GitHub, Scrum, Terminal, VS Code, Android Studio' },
+                { label: 'Idiomas:',      value: 'Español (nativo), Inglés (intermedio)' },
+            ];
+            skills.forEach(s => {
+                checkPage(5);
+                doc.setFont('helvetica', 'bold');
+                doc.text('• ' + s.label, marginL, y);
+                const labelW = doc.getTextWidth('• ' + s.label) + 2;
+                doc.setFont('helvetica', 'normal');
+                const lines = doc.splitTextToSize(s.value, marginR - marginL - labelW);
+                doc.text(lines, marginL + labelW, y);
+                y += lines.length * 4.5 + 1;
+            });
+            y += 3;
+
+            // ── CERTIFICACIONES ───────────────────────────────────────
+            sectionHeader('Certificaciones');
+            const certs = [
+                { name: 'Android Nivel Intermedio con Kotlin',     date: 'Mar 2026', issuer: 'Cursa · Ariasti Devs — 8h 24min' },
+                { name: 'Learn Kotlin Course',                      date: 'Mar 2026', issuer: 'Codecademy' },
+                { name: 'Curso de Desarrollo de Apps Móviles',      date: 'Mar 2026', issuer: 'Google  (ID: 456004101)' },
+                { name: 'Apps iOS con Swift',                       date: 'Ene 2026', issuer: 'Cursa · Vida de Programador — 3h 12min' },
+                { name: 'Flutter for Beginners',                    date: 'Ene 2026', issuer: 'Great Learning — Verified Certificate' },
+                { name: 'Digital Skills: Mobile (95%)',             date: 'Ene 2026', issuer: 'FutureLearn · Accenture — CPD Certified' },
+                { name: 'Certificación en Scrum',                   date: '2022',     issuer: 'Metodologías ágiles para gestión de proyectos de software' },
+            ];
+            certs.forEach(c => {
+                checkPage(9);
+                doc.setFontSize(9.5);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(...black);
+                doc.text(c.name + '  (' + c.date + ')', marginL, y);
+                y += 4.5;
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...gray);
+                doc.text(c.issuer, marginL + 3, y);
+                y += 5.5;
+            });
+
+            // ── FOOTER ────────────────────────────────────────────────
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.setFontSize(7.5);
+                doc.setTextColor(...gray);
+                doc.setFont('helvetica', 'normal');
+                doc.text(
+                    'CV generado desde portafolio personal — kelvin0880.github.io/Portafolio — ' + new Date().toLocaleDateString('es-DO'),
+                    105, pageH - 8, { align: 'center' }
+                );
+                if (totalPages > 1) {
+                    doc.text('Página ' + i + ' / ' + totalPages, marginR, pageH - 8, { align: 'right' });
+                }
+            }
+
+            doc.save('CV_Kelvin_Pina_Gomez_2026.pdf');
         });
     }
 });
